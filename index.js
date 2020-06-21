@@ -12,7 +12,7 @@ const User =require("./models/user");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 
-
+//checking new branch
 
 const app=express();
 mongoose.connect("mongodb+srv://mankibaat:mankibaat@123@cluster0-vsx35.mongodb.net/MankiBaatDB>?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
