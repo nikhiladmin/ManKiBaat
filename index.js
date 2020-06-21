@@ -8,7 +8,7 @@ const session = require("express-session");
 const mongodbSession = require("connect-mongodb-session")(session);
 require('dotenv').config({ path: 'ENV_FILENAME' });
 
-const User =require("./models/user");
+const User = require("./models/user");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 
