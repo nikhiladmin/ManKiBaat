@@ -6,4 +6,8 @@ const questionSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Form", questionSchema);
+questionModel = mongoose.model("Form", questionSchema);
+module.exports = {
+    questionModel,
+    questionSchema
+}

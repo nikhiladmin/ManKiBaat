@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", isAuth, function (req, res) {
     res.render("form", {
-        Form: Form
+        Form: Form.questionSchema
     });
 })
 
@@ -33,3 +33,5 @@ router.post("/", isAuth, function (req, res) {
         }
     })
 })
+
+module.exports = router;
