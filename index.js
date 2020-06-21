@@ -3,7 +3,7 @@ const bodyParser =require("body-parser");
 const path = require("path");
 const ejs=require("ejs");
 const mongoose = require("mongoose");
-const flash =require("connect-flash");
+const flash = require("connect-flash");
 const session = require("express-session");
 const mongodbSession = require("connect-mongodb-session")(session);
 require('dotenv').config({ path: 'ENV_FILENAME' });
