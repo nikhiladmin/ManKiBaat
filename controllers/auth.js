@@ -1,5 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const Avatar = require('avatar-builder'); 
+const fs = require('fs');
 const { validationResult } = require("express-validator");
 
 exports.getLogin = (req, res, next) => {
@@ -66,7 +68,15 @@ exports.postSignup = (req, res, next) => {
    const email = req.body.email;
    const password = req.body.password;
    const confirmPassword = req.body.confirmPassword;
- const errors = validationResult(req);
+
+   //Avatar-builder
+   const avatar = Avatar.githubBuilder(128);
+    avatar.create(email).then(buffer => {
+        //console.log(buffer);
+        fs.writeFileSync(__dirname + '/avtar' + '/' + email + '.png', buffer)
+    });
+
+   const errors = validationResult(req);
    if (!errors.isEmpty()) {
       console.log(errors.array());
       return res.status(422).render("auth/signup", {
