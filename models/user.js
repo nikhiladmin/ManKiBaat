@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Form = require("../models/questions");
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -10,7 +9,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    answers: []
+    answers: {
+        type: String
+    }
 });
 
 
