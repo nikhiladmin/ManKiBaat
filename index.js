@@ -11,10 +11,11 @@ require('dotenv').config({ path: 'ENV_FILENAME' });
 const User =require("./models/user");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
-
+const formRoutes=require("./routes/form");
 
 
 const app=express();
+//mongoose.connect('mongodb://localhost/mankibaat');
 mongoose.connect("mongodb+srv://mankibaat:mankibaat@123@cluster0-vsx35.mongodb.net/MankiBaatDB?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 
 const store = new mongodbSession({
@@ -25,6 +26,13 @@ const store = new mongodbSession({
 app.set("view engine","ejs");
 
 app.use(session({ secret: "My name is Nikhil", resave: false, saveUninitialized: false, store: store }));
+app.use(require('express-session')
+({
+    secret:"Rusty is a very adorable dog",
+    resave:false,
+    saveUninitialized:false
+}));
+
 app.use(express.static(path.join(__dirname,"public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(flash());
@@ -47,6 +55,7 @@ app.use((req, res, next) => {
 
 app.use(authRoutes);
 app.use(userRoutes);
+app.use(formRoutes);
 
 
 port = process.env.PORT || 4000;
