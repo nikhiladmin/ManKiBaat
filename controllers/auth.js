@@ -1,6 +1,10 @@
+
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const { validationResult } = require("express-validator");
+const socket = require("../socket");
+
+
 
 exports.getLogin = (req, res, next) => {
    res.render("auth/login", {
@@ -15,7 +19,7 @@ exports.postLogin = (req, res, next) => {
    const password=req.body.password;
    const errors = validationResult(req);
    if(!errors.isEmpty()){
-    return res.status(422).render("auth/login",{
+return res.status(422).render("auth/login",{
         pageTitle : "login",
         errorMessage : errors.array()[0].msg,
         oldInput : {email :email,password :password },
@@ -34,6 +38,13 @@ exports.postLogin = (req, res, next) => {
         bcrypt.compare(password, user.password)
         .then(isMatch=>{
             if(isMatch){
+
+            //Active User
+            console.log(user);
+            socket.getIO() .of('/chat').emit("activeUser",{
+                name : user.email
+            });
+
             req.session.isLoggedIn = true;  
             req.session.user=user;
             return req.session.save(()=>{
@@ -86,7 +97,8 @@ exports.postSignup = (req, res, next) => {
      });
      return user.save();
    }).then(result=>{
-       res.redirect("/login");
+       req.flash('email', email)
+       res.redirect("/avatar");
    })
 .catch(err => {
  console.log(err);
@@ -98,3 +110,26 @@ exports.postLogout = (req,res,next)=>{
         res.redirect("/login");
     });
 }
+
+exports.getAvatar = (req,res,next)=>{
+    res.render("user/avatar",{
+        pageTitle : "Choose Avatar"
+    });
+}
+
+exports.postAvatar = (req,res,next)=>{
+    let email = req.flash('email')
+    avatarLink = req.body.avatarLink;
+    User.findOneAndUpdate({email : email}, { $set: { avatar: avatarLink }}, { new: true }, function (err, user) {
+        if (!err) {
+            User.findOne({email:email}).then(user=>{
+                req.session.isLoggedIn = true;  
+                req.session.user=user;
+                return req.session.save(()=>{
+                res.redirect("/user");
+                });
+            }); 
+        }
+      });
+}
+

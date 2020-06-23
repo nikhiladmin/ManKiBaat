@@ -2,12 +2,17 @@
     <a class="logo" href="/"><img src="/image/logo.svg" width="40px" alt=""/></a>
     <ul>
        <% if(isAuthenticated){%>
+         <li>
+            <a href="/chat">Chat</a> 
+         </li>
        <li>
             <form action="/logout" method="post">
                <button class="btn-link" type="submit">Logout</button>
                </form> 
          </li>
-            
+            <li> 
+                <img id='pic' src="<%=avatar%>" width="30px" alt="">
+           </li>
          <%}else{%>
        <li><a   href="/Signup">Signup</a></li>
        <li> 

@@ -197,3 +197,64 @@ nav > ul > li > a{
            width: 300px;
        }
 }
+
+#user{
+    padding: 4px 50px;
+    background-color: rgb(243, 220, 224);
+}
+
+.active-chat{
+    padding: 0px 10px;
+    background-color: rgb(11, 202, 11);
+    border-radius:25px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+.avatar{
+    width: 100%;
+    height: 500px;
+}
+.profile-pic{
+    text-align: center;
+    margin: 40px 0px;
+}
+
+.profile-pic > img {
+    vertical-align: middle;
+    width: 80px;
+    border: 2px solid rgb(255, 22, 61);
+    height: 80px;
+    border-radius: 80%;
+  }
+
+  .profile-pic > img:hover {
+    border: 2px solid rgb(247, 9, 49);
+
+  }
+.avatar-pic{
+    margin: 40px 0px;
+    text-align: center;
+    padding: 10px 5px;
+}
+
+.avatar-pic > img {
+    cursor: pointer;
+    vertical-align: middle;
+    width: 80px;
+    height: 80px;
+    border: 2px solid #FFAFBD;
+    border-radius: 80%;
+  }
+
+  .avatar-pic > img:hover {
+    border: 2px solid rgb(129, 59, 71);
+
+  }
+
+.avatar-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    cursor: pointer;
+    transform: translate(-50%,-50%);
+}
