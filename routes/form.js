@@ -9,11 +9,11 @@ const isAuth = require("../middleware/is-auth");
 
 const router = express.Router();
 
-router.get("/", isAuth, function (req, res) {
-    res.render("form");
+router.get("/form", isAuth, function (req, res) {
+    res.render("form", {pageTitle: "Form"});
 })
 
-router.post("/", isAuth, function (req, res) {
+router.post("/form", isAuth, function (req, res) {
 
     // sts.assumeRole({
     //     DurationSeconds: 3600,
@@ -25,15 +25,15 @@ router.post("/", isAuth, function (req, res) {
     // })
 
     const s3 = new AWS.S3({
-        accessKeyId: AKIAIXXCKNDVTNEBFIUQ,
-        secretAccessKey: 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
+        accessKeyId: "AKIAIXXCKNDVTNEBFIUQ",
+        secretAccessKey: "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"
     })
 
-    answers = [];
+    answers = [req.body.q1, req.body.q2, req.body.q3, req.body.q4];
 
-    for (var i = 0; i < req.body.length; ++i) {
-        answers.push(req.body[i]);
-    }
+    // for (var i = 0; i < req.body.length; ++i) {
+    //     answers.push(req.body[i]);
+    // }
 
     var csv = answers.map(function (ans) {
             return JSON.stringify(Object.values(ans));
@@ -43,7 +43,7 @@ router.post("/", isAuth, function (req, res) {
 
     const filename = req.session.user._id + ".csv";
 
-    fs.writeFile(filename, dataToWrite, 'utf8', function (err) {
+    fs.writeFile(filename, answers, 'utf8', function (err) {
         if (err) {
             console.log('Some error occured - file either not saved or corrupted file saved.');
         }
@@ -69,7 +69,7 @@ router.post("/", isAuth, function (req, res) {
                         next(err)
                     else {
                         fs.unlinkSync(filename);
-                        return res.redirect("/");
+                        return res.redirect("/form");
                     }
                 })
             }
