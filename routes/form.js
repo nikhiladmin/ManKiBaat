@@ -4,10 +4,8 @@ const fs = require("fs");
 const AWS = require("aws-sdk")
 const isAuth = require("../middleware/is-auth");
 
-const s3 = new AWS.S3({
-    accessKeyId: "",
-    secretAccessKey: ""
-})
+// const sts = new AWS.STS();
+
 
 const router = express.Router();
 
@@ -16,6 +14,20 @@ router.get("/", isAuth, function (req, res) {
 })
 
 router.post("/", isAuth, function (req, res) {
+
+    // sts.assumeRole({
+    //     DurationSeconds: 3600,
+    //     ExternalId: '535718353127',
+    //     RoleArn: "arn:aws:iam::535718353127:role/s3_fullaccess_by_ec2",
+    //     RoleSessionName: 'mankibaatuserform'
+    // }, (err, data) => {
+    //     if (err) throw err;
+    // })
+
+    const s3 = new AWS.S3({
+        accessKeyId: AKIAIXXCKNDVTNEBFIUQ,
+        secretAccessKey: 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
+    })
 
     answers = [];
 
@@ -41,8 +53,8 @@ router.post("/", isAuth, function (req, res) {
     fs.readFile(filename, (err, data) => {
         if (err) throw err;
         const params = {
-            Bucket: "",
-            Key: filename,
+            Bucket: "mankibaatuserdata",
+            Key: "userform/"+filename,
             Body: JSON.stringify(data, null, 2)
         };
         s3.upload(params, (Err, data) => {
