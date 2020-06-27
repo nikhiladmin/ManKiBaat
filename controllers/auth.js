@@ -2,6 +2,8 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const { validationResult } = require("express-validator");
 
+const io = require("../socket").getIO();
+
 exports.getLogin = (req, res, next) => {
    res.render("auth/login", {
       pageTitle: "Login",
@@ -46,7 +48,6 @@ exports.postLogin = (req, res, next) => {
                     errorMessage : "Password not correct !",
                     oldInput : {email :email,password :password },
                 });
-                
             }
         })
         .catch(err=> console.log(err));
@@ -94,7 +95,7 @@ exports.postSignup = (req, res, next) => {
 };
 
 exports.postLogout = (req,res,next)=>{
-    req.session.destroy(()=>{
-        res.redirect("/login");
-    });
+        req.session.destroy(()=>{
+            res.redirect("/login");
+        });
 }

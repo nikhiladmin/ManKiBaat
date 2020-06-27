@@ -8,4 +8,6 @@ router.get("/",userControllers.home);
 
 router.get("/user",userControllers.User);
 
+router.get("/user/:chatName",userControllers.getChat);
+
 module.exports = router;

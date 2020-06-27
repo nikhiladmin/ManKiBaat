@@ -1,13 +1,58 @@
+<style>
+   .dropdown {
+     position: relative;
+     display: inline-block;
+   }
+   .dropdown  > span{
+    color: white;
+    font-weight: bold;
+   }
+   
+   .dropdown-content {
+     display: none;
+     position: absolute;
+     background-color: #f9f9f9;
+     min-width: 160px;
+     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+     padding: 12px 16px;
+     z-index: 1;
+   }
+   .dropdown-content > p{
+      padding: 4px;
+   }
+   
+   .dropdown:hover .dropdown-content {
+     display: block;
+   }
+   </style>
+
+
+
 <nav>
     <a class="logo" href="/"><img src="/image/logo.svg" width="40px" alt=""/></a>
     <ul>
        <% if(isAuthenticated){%>
+        <li>
+            <a  href="/user/chat">Chat</a>
+        </li>
+         <li>
+            <div class="dropdown">
+               <span>Dropdown</span>
+               <div class="dropdown-content">
+                 <p>Hello World!</p>
+                 <p>Hello World!</p>
+                 <p>Hello World!</p>
+                 <p>Hello World!</p>
+                 <p>Hello World!</p>
+               </div>
+             </div>
+         </li>
        <li>
             <form action="/logout" method="post">
                <button class="btn-link" type="submit">Logout</button>
                </form> 
          </li>
-            
+           
          <%}else{%>
        <li><a   href="/Signup">Signup</a></li>
        <li> 

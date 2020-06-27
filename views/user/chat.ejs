@@ -1,0 +1,75 @@
+<%- include("../includes/header",{pageTitle : pageTitle}) -%>
+<%- include("../includes/navigation") -%>
+<div class="chat">
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, '<%=userName%>')" id="defaultOpen"><%=userName%></button>
+        <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+      </div>
+      
+      <div id="<%=userName%>" class="tabcontent">
+          <div id="chatarea">
+            <ul id="messages">
+              <li>
+                <span>userName</span><br>
+                <p>message</p>
+              </li>
+
+              <script id="message-template" type="x-tmpl-mustache">
+              <li>
+                  <span>{{user}}</span><br>
+                  <p>{{message}}</p>
+                </li>
+              </script> 
+            </ul>
+                <!-- <div class="send">
+                        <p>Hii , how are you</p>
+                    </div>
+                    <div class="receive">
+                            <p>Hii , how are you</p>
+                    </div> -->
+          </div>
+        
+        <form id="message-form" method="post">
+          <textarea name="" id="msg" cols="30" rows="2"></textarea>
+          <input type="hidden" id="chat" value="<%=room%>">
+          <input type="hidden" id="sender" value="<%=userName%>">
+            <button>Send</button>
+        </form>
+      </div>
+      
+      <div id="Paris" class="tabcontent">
+           
+      </div>
+      
+      <div id="Tokyo" class="tabcontent">
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan.</p>
+      </div>      
+
+    </div>
+
+<script>
+    function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  
+document.getElementById("defaultOpen").click();
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+<script type="text/Javascript" src="/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js" integrity="sha256-JoAhdrtmvUmN+9RtRzuF66Ok9RkjWz1XuSObZ8CcwSk=" crossorigin="anonymous"></script>
+
+<%- include("../includes/footer") -%>
