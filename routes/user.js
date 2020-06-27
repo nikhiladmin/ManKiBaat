@@ -8,7 +8,6 @@ router.get("/",userControllers.home);
 
 router.get("/user",isAuth,userControllers.User);
 
-router.get("/chat",isAuth,userControllers.chat);
 
 
 

@@ -2,7 +2,8 @@ const User = require("../models/user");
 
 exports.home =(req,res,next)=>{
     res.render("home",{
-        pageTitle : "Home Page"
+        pageTitle : "Home Page",
+        avatar : req.user.avatar
     });
 }
 
@@ -13,10 +14,4 @@ exports.User =(req,res,next)=>{
     });
 }
 
-
-exports.chat =(req,res,next)=>{
-    res.render("user/chat",{
-        pageTitle : "Chat"
-    });
-}
 
