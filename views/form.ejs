@@ -1,0 +1,17 @@
+<%- include("./includes/header",{pageTitle : pageTitle}) -%>
+<%- include("./includes/navigation") -%>
+
+
+<form action="/form" method="POST">
+    <label for="fname">Question1</label><br>
+    <input type="text" id="fname" name="q1"><br>
+    <label for="lname">Question2</label><br>
+    <input type="text" id="lname" name="q2"><br>
+    <label for="fname">Question3</label><br>
+    <input type="text" id="fname" name="q3"><br>
+    <label for="lname">Question4</label><br>
+    <input type="text" id="lname" name="q4">
+    <input type="submit" value="Submit">
+</form>
+
+<%- include("./includes/footer") -%>
