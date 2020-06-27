@@ -5,6 +5,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
+    avatar :{
+        type :String,
+        },
+
     password: {
         type: String,
         required: true
@@ -12,6 +17,7 @@ const userSchema = new mongoose.Schema({
     answers: {
         type: String
     }
+
 });
 
 

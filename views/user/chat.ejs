@@ -1,0 +1,27 @@
+<%- include("../includes/header",{pageTitle : pageTitle}) -%>
+<%- include("../includes/navigation") -%>
+
+<section class="chat">
+    <div class="row">
+        <div class="col-md-6">
+            <div id="user">
+                 <p><span class="active-chat"></span>Nikhil</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+let activeUser;
+
+const server = io()
+      server.on('connect', function(){ 
+        console.log('Connected to Server');
+         server.on('activeUser',(name)=>{
+          $('#user').append(`
+            <p><span class="active-chat"></span>${name}</p>
+        `);
+        });
+      }); 
+</script>
+<%- include("../includes/footer") -%>

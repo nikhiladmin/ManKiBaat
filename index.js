@@ -8,6 +8,10 @@ const session = require("express-session");
 const mongodbSession = require("connect-mongodb-session")(session);
 require('dotenv').config({ path: 'ENV_FILENAME' });
 
+const app=express();
+const server =require('http').createServer(app);
+const io =require("./socket").init(server);
+
 const User =require("./models/user");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
@@ -15,8 +19,12 @@ const formRoutes = require("./routes/form");
 
 
 
-const app=express();
+
+
 mongoose.connect("mongodb+srv://mankibaat:mankibaat@123@cluster0-vsx35.mongodb.net/MankiBaatDB?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
+
+
+
 
 const store = new mongodbSession({
     uri: "mongodb+srv://mankibaat:mankibaat@123@cluster0-vsx35.mongodb.net/MankiBaatDB?retryWrites=true&w=majority",
@@ -50,8 +58,12 @@ app.use(authRoutes);
 app.use(userRoutes);
 app.use(formRoutes);
 
-
+let connection = mongoose.connection;
 port = process.env.PORT || 4000;
+
+
+
 app.listen(port,()=>{
     console.log("Server started Successfully");
 });
+

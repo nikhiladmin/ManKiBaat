@@ -1,0 +1,37 @@
+<%- include("../includes/header",{pageTitle : pageTitle}) -%>
+<%- include("../includes/navigation") -%>
+
+<section class="avatar">
+    <div class="avatar-box">
+           <div class="profile-pic">
+            <img id='pic' src="/image/avatar/1.png" width="80px" alt="">
+            <h2>Profile Picture</h2>
+        </div>
+        <div class="avatar-pic">
+                <h3>Choose Avatar</h3>
+            <img class="av" id='01' onclick="pic1(this)" src="/image/avatar/1.png" width="80px" alt="">
+            <img class="av" id='02' onclick="pic2(this)" src="/image/avatar/2.png" width="80px" alt="">
+            <img class="av" id='03' onclick="pic3(this)" src="/image/avatar/3.png" width="80px" alt="">
+            <img class="av" id='04' onclick="pic4(this)" src="/image/avatar/4.png" width="80px" alt="">
+            <img class="av" id='05' onclick="pic5(this)" src="/image/avatar/5.png" width="80px" alt="">
+            <img class="av" id='06' onclick="pic6(this)" src="/image/avatar/6.png" width="80px" alt="">
+            <img class="av" id='07' onclick="pic7(this)" src="/image/avatar/7.png" width="80px" alt="">
+            <img class="av" id='08' onclick="pic8(this)" src="/image/avatar/8.png" width="80px" alt="">
+        
+            <form action="/avatar" method="post">
+                    <input name="avatarLink" value="" id="pic-link" type="hidden">
+                    <button class="btn">Next</button>
+                </form>
+        </div>
+       
+    </div>
+
+</section>
+
+<script>
+
+
+</script>
+
+
+<%- include("../includes/footer") -%>

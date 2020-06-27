@@ -1,4 +1,4 @@
-
+const User = require("../models/user");
 
 exports.home =(req,res,next)=>{
     res.render("home",{
@@ -8,6 +8,15 @@ exports.home =(req,res,next)=>{
 
 exports.User =(req,res,next)=>{
     res.render("user/user",{
-        pageTitle : "User"
+        pageTitle : "User",
+        avatar : req.user.avatar
     });
 }
+
+
+exports.chat =(req,res,next)=>{
+    res.render("user/chat",{
+        pageTitle : "Chat"
+    });
+}
+

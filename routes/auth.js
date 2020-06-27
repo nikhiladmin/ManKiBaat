@@ -38,4 +38,9 @@ authControllers.postSignup);
 
 router.post("/logout",authControllers.postLogout);
 
+
+router.get("/avatar",authControllers.getAvatar);
+
+router.post("/avatar",authControllers.postAvatar);
+
 module.exports = router;
