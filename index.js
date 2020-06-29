@@ -12,6 +12,7 @@ const User =require("./models/user");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const formRoutes = require("./routes/form");
+const entertainRoutes = require("./routes/entertainment");
 
 
 
@@ -49,6 +50,7 @@ app.use((req, res, next) => {
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(formRoutes);
+app.use(entertainRoutes);
 
 
 port = process.env.PORT || 4000;
