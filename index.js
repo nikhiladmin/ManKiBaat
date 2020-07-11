@@ -16,14 +16,13 @@ const User =require("./models/user");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 
+const MongoURI = "mongodb+srv://mankibaat:mankibaat@123@cluster0-vsx35.mongodb.net/MankiBaatDB?retryWrites=true&w=majority"
 
-
-
-mongoose.connect("mongodb+srv://mankibaat:mankibaat@123@cluster0-vsx35.mongodb.net/MankiBaatDB?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(MongoURI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 
 const store = new mongodbSession({
-    uri: "mongodb+srv://mankibaat:mankibaat@123@cluster0-vsx35.mongodb.net/MankiBaatDB?retryWrites=true&w=majority",
+    uri: MongoURI,
     collection: "session"
  });
 
@@ -32,9 +31,8 @@ app.set("view engine","ejs");
 app.use(session({ secret: "My name is Nikhil", resave: false, saveUninitialized: false, store: store }));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(flash());
-
-
 
 app.use((req,res,next)=>{
     if(!req.session.user){
@@ -46,12 +44,14 @@ app.use((req,res,next)=>{
         next();
     }).catch(err=> console.log(err));
 });
-require("./socket/chat")();
+
+
+
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedIn;
     next();
  });
-
+require("./socket/chat")()
 app.use(authRoutes);
 app.use(userRoutes);
 
@@ -60,6 +60,8 @@ port = process.env.PORT || 4000;
 server.listen(port,()=>{
     console.log("Server started Successfully http://localhost:4000"); 
 });
+
+
 
 
 

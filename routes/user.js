@@ -10,4 +10,6 @@ router.get("/user",userControllers.User);
 
 router.get("/user/:chatName",userControllers.getChat);
 
+router.get("/message/:messageUsers",userControllers.getMessage);
+
 module.exports = router;
